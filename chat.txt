@@ -1,0 +1,64 @@
+//datainterface
+
+public interface datainterface extends Remote
+{
+    public String metodeTerima(String pesan) throws RemoteException;
+}
+
+
+//data
+public class data extends UnicastRemoteObject implements datainterface
+{
+    public data() throws RemoteException {
+    }
+
+    @Override
+        public String metodeTerima(String pesan) throws RemoteException{
+            String terima = pesan; 
+            if((terima.equals("exit"))){
+                System.out.println("Client Meninggalkan Obrolan");
+            }else if((terima.equals("Hi Server"))){
+                System.out.println("Pesan dari Client : "+terima);
+                System.out.println("Pesan dari Server : Hallo...");
+                return (terima); 
+            }else if((terima.equals("Hallo Server"))){
+                System.out.println("Pesan dari Client : "+terima);
+                System.out.println("Pesan dari Server : Hiii...");
+                return (terima); 
+            }
+        return null;
+        }
+     
+}
+
+
+//client
+import java.io.IOException;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.Scanner;
+public class client {
+    
+    public static void main(String[] args) throws RemoteException,
+        NotBoundException, MalformedURLException {
+        String terima = null, kirim= null;
+        DataInputStream keyboard = new DataInputStream(System.in);
+        datainterface DATA =
+        (datainterface) Naming.lookup("rmi://localhost:1099/DATA");
+        System.out.println("Client Berhasil Terkoneksi Ke Server");         
+            do {            
+                try{
+                System.out.println("Client Mengirim Pesan : ");
+                kirim = keyboard.readLine();
+                }
+                catch (IOException e){
+                    System.out.println(e);
+                }
+                DATA.metodeTerima(kirim);
+            } while (!(kirim.equals("exit")));
+
+    }
+}
