@@ -58,7 +58,9 @@ public class client {
                     System.out.println(e);
                 }
                 DATA.metodeTerima(kirim);
-                                
+                
+                
+                //disini buat balasan dari sever
                 if((kirim.equals("Hi Server"))){
                     System.out.println("Pesan dari Server : Hallo...");
 
