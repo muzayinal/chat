@@ -58,6 +58,13 @@ public class client {
                     System.out.println(e);
                 }
                 DATA.metodeTerima(kirim);
+                                
+                if((kirim.equals("Hi Server"))){
+                    System.out.println("Pesan dari Server : Hallo...");
+
+                }else if((kirim.equals("Hallo Server"))){
+                    System.out.println("Pesan dari Server : Hiii...");
+                }
             } while (!(kirim.equals("exit")));
 
     }
