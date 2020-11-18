@@ -29,11 +29,11 @@ public class data extends UnicastRemoteObject implements datainterface
             if((terima.equals("exit"))){
                 System.out.println("Client Meninggalkan Obrolan");
             }else if((terima.equals("Hi Server"))){
-                System.out.println("Pesan dari Client : "+terima);
+                System.out.println("Pesan dari " + Tampungnama +" : "+terima);
                 System.out.println("Pesan dari Server : Hallo...");
                 return (terima); 
             }else if((terima.equals("Hallo Server"))){
-                System.out.println("Pesan dari Client : "+terima);
+                System.out.println("Pesan dari " + Tampungnama +" : "+terima);
                 System.out.println("Pesan dari Server : Hiii...");
                 return (terima); 
             }
