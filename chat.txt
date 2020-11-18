@@ -3,6 +3,7 @@
 public interface datainterface extends Remote
 {
     public String metodeTerima(String pesan) throws RemoteException;
+    public String metodeNama(String pesan) throws RemoteException;
 }
 
 
@@ -11,6 +12,16 @@ public class data extends UnicastRemoteObject implements datainterface
 {
     public data() throws RemoteException {
     }
+    
+       String Tampungnama;
+     public String metodeNama(String nama) throws RemoteException{
+         String sebutnama;
+         Tampungnama = nama;
+         System.out.println("Nama Client : " + Tampungnama);
+         sebutnama=("Hai "+ Tampungnama + "........!!");
+        return (sebutnama);
+         
+     }
 
     @Override
         public String metodeTerima(String pesan) throws RemoteException{
@@ -43,12 +54,24 @@ import java.util.Scanner;
 public class client {
     
     public static void main(String[] args) throws RemoteException,
-        NotBoundException, MalformedURLException {
-        String terima = null, kirim= null;
+         NotBoundException, MalformedURLException {
+        String terima = null, kirim= null, nama = null, balasan;
         DataInputStream keyboard = new DataInputStream(System.in);
         datainterface DATA =
         (datainterface) Naming.lookup("rmi://localhost:1099/DATA");
-        System.out.println("Client Berhasil Terkoneksi Ke Server");         
+        System.out.println("Client Berhasil Terkoneksi Ke Server");  
+        
+        
+        try{
+            System.out.println("Masukkan Nama Anda : ");
+            nama = keyboard.readLine();
+        }catch(IOException e){
+            System.out.println(e);
+        }
+        DATA.metodeNama(nama);
+        System.out.println("Pesan dari server : Hai " + nama +"....!!!");
+        
+        //isi       
             do {            
                 try{
                 System.out.println("Client Mengirim Pesan : ");
@@ -71,3 +94,4 @@ public class client {
 
     }
 }
+
